@@ -1,0 +1,24 @@
+import React from 'react';
+import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
+import Home from './pages/Home';
+import Blog from './pages/Blog';
+import Login from './pages/Login';
+import PostDetails from './pages/PostDetails';
+import Navbar from './components/Navbar';
+import './App.css';
+
+function App() {
+  const user = true; // Replace with actual auth logic
+
+  return (
+    <Router>
+      <Navbar />
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/blog" element={user ? <Blog /> : <Navigate to="/login" />} />
+        <Route path="/blog/:id" element={user ? <PostDetails /> : <Navigate to="/login" />} />
+      </Routes>
+    </Router>
+  );
+}
